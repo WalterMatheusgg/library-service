@@ -3,23 +3,27 @@
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-lg-8">
-        <div class="card shadow-sm">
-            <div class="card-body p-4">
-                <h1 class="h3 mb-3">
+        <div class="card form-page-card">
+            <div class="card-body p-4 p-md-5">
+                <h1 class="h3 fw-bold mb-2">
                     {% if object %}
-                        Edit book
+                        Editar livro
                     {% else %}
-                        Add book
+                        Cadastrar livro
                     {% endif %}
                 </h1>
+
+                <p class="text-muted mb-4">
+                    Preencha as informações do livro para manter o acervo atualizado.
+                </p>
 
                 <form method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
 
-                    <div class="d-flex gap-2">
+                    <div class="d-flex gap-2 mt-4">
                         <button type="submit" class="btn btn-primary">
-                            Save
+                            Salvar
                         </button>
 
                         <button
@@ -27,7 +31,7 @@
                             onclick="history.back()"
                             class="btn btn-outline-secondary"
                         >
-                            Cancel
+                            Cancelar
                         </button>
                     </div>
                 </form>

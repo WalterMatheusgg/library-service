@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row g-4">
     <div class="col-lg-4">
-        <div class="card shadow-sm">
+        <div class="card shadow-sm overflow-hidden">
             {% if book.cover_url %}
                 <img
                     src="{{ book.cover_url }}"
@@ -12,35 +12,39 @@
                 >
             {% endif %}
 
-            <div class="card-body">
-                <h1 class="h3">{{ book.title }}</h1>
-                <p class="text-muted">by {{ book.author }}</p>
-
-                <p>
-                    <strong>Total copies:</strong> {{ book.inventory }}<br>
-                    <strong>Available copies:</strong> {{ book.available_copies }}
-                </p>
+            <div class="card-body p-4">
+                <h1 class="h3 fw-bold">{{ book.title }}</h1>
+                <p class="text-muted mb-3">por {{ book.author }}</p>
 
                 <div class="mb-3">
                     {% for genre in book.genres.all %}
-                        <span class="badge text-bg-secondary">
+                        <span class="badge text-bg-primary">
                             {{ genre.name }}
                         </span>
                     {% empty %}
                         <span class="badge text-bg-light">
-                            No genre
+                            Sem gênero
                         </span>
                     {% endfor %}
                 </div>
 
+                <div class="border rounded-4 p-3 bg-light mb-3">
+                    <p class="mb-1">
+                        <strong>Total de exemplares:</strong> {{ book.inventory }}
+                    </p>
+                    <p class="mb-0">
+                        <strong>Disponíveis:</strong> {{ book.available_copies }}
+                    </p>
+                </div>
+
                 {% if user.is_authenticated %}
-                    <div class="d-flex gap-2 mb-3">
+                    <div class="d-flex gap-2">
                         <a href="{% url 'catalog:book-update' book.pk %}" class="btn btn-warning btn-sm">
-                            Edit
+                            Editar
                         </a>
 
                         <a href="{% url 'catalog:book-delete' book.pk %}" class="btn btn-danger btn-sm">
-                            Delete
+                            Excluir
                         </a>
                     </div>
                 {% endif %}
@@ -50,21 +54,24 @@
 
     <div class="col-lg-8">
         <div class="card shadow-sm mb-4">
-            <div class="card-body">
-                <h2 class="h4">Description</h2>
+            <div class="card-body p-4">
+                <h2 class="h4 fw-bold">Descrição</h2>
 
                 {% if book.description %}
-                    <p>{{ book.description }}</p>
+                    <p class="text-muted mb-0">{{ book.description }}</p>
                 {% else %}
-                    <p class="text-muted">No description provided.</p>
+                    <p class="text-muted mb-0">Nenhuma descrição cadastrada.</p>
                 {% endif %}
             </div>
         </div>
 
         {% if user.is_authenticated %}
             <div class="card shadow-sm mb-4">
-                <div class="card-body">
-                    <h2 class="h4">Borrow this book</h2>
+                <div class="card-body p-4">
+                    <h2 class="h4 fw-bold">Emprestar este livro</h2>
+                    <p class="text-muted">
+                        Informe a data prevista de devolução para registrar o empréstimo.
+                    </p>
 
                     {% if book.available_copies > 0 %}
                         <form method="post" action="{% url 'catalog:book-borrow' book.pk %}">
@@ -72,57 +79,57 @@
 
                             <div class="mb-3">
                                 <label class="form-label">
-                                    Due date
+                                    Data de devolução
                                 </label>
                                 {{ borrowing_form.due_date }}
                             </div>
 
                             <button class="btn btn-primary" type="submit">
-                                Borrow book
+                                Confirmar empréstimo
                             </button>
                         </form>
                     {% else %}
                         <div class="alert alert-warning mb-0">
-                            There are no copies available right now.
+                            Não há exemplares disponíveis no momento.
                         </div>
                     {% endif %}
                 </div>
             </div>
         {% else %}
-            <div class="alert alert-info">
-                Log in to borrow this book.
+            <div class="alert alert-info shadow-sm">
+                Faça login para emprestar este livro.
             </div>
         {% endif %}
 
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h2 class="h4">Active borrowings</h2>
-
-                <table class="table table-striped align-middle">
-                    <thead>
-                    <tr>
-                        <th>User</th>
-                        <th>Borrowed at</th>
-                        <th>Due date</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for borrowing in active_borrowings %}
-                        <tr>
-                            <td>{{ borrowing.borrower.username }}</td>
-                            <td>{{ borrowing.borrowed_at|date:"Y-m-d H:i" }}</td>
-                            <td>{{ borrowing.due_date }}</td>
-                        </tr>
-                    {% empty %}
-                        <tr>
-                            <td colspan="3" class="text-muted">
-                                No active borrowings.
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+        <div class="table-card">
+            <div class="p-4 border-bottom">
+                <h2 class="h4 fw-bold mb-0">Empréstimos ativos</h2>
             </div>
+
+            <table class="table table-hover align-middle">
+                <thead>
+                <tr>
+                    <th>Usuário</th>
+                    <th>Data do empréstimo</th>
+                    <th>Data de devolução</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for borrowing in active_borrowings %}
+                    <tr>
+                        <td>{{ borrowing.borrower.username }}</td>
+                        <td>{{ borrowing.borrowed_at|date:"d/m/Y H:i" }}</td>
+                        <td>{{ borrowing.due_date|date:"d/m/Y" }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="3" class="text-muted p-4">
+                            Nenhum empréstimo ativo.
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
