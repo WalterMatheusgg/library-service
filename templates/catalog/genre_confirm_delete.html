@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h1 class="h3">Delete genre</h1>
+
+        <p>
+            Are you sure you want to delete
+            <strong>{{ object.name }}</strong>?
+        </p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <button type="submit" class="btn btn-danger">
+                Delete
+            </button>
+
+            <button
+                type="button"
+                onclick="history.back()"
+                class="btn btn-outline-secondary"
+            >
+                Cancel
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

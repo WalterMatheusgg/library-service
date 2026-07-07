@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>My Borrowings</h1>
+
+<p class="text-muted">
+    Track your borrowed books and return active loans.
+</p>
+
+<table class="table table-striped table-hover align-middle shadow-sm">
+    <thead>
+    <tr>
+        <th>Book</th>
+        <th>Author</th>
+        <th>Borrowed at</th>
+        <th>Due date</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for borrowing in borrowing_list %}
+        <tr>
+            <td>
+                <a href="{{ borrowing.book.get_absolute_url }}">
+                    {{ borrowing.book.title }}
+                </a>
+            </td>
+            <td>{{ borrowing.book.author }}</td>
+            <td>{{ borrowing.borrowed_at|date:"Y-m-d H:i" }}</td>
+            <td>{{ borrowing.due_date }}</td>
+            <td>
+                {% if borrowing.is_active %}
+                    <span class="badge text-bg-warning">Active</span>
+                {% else %}
+                    <span class="badge text-bg-success">Returned</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if borrowing.is_active %}
+                    <form method="post" action="{% url 'catalog:borrowing-return' borrowing.pk %}">
+                        {% csrf_token %}
+                        <button class="btn btn-sm btn-outline-success" type="submit">
+                            Return
+                        </button>
+                    </form>
+                {% else %}
+                    <span class="text-muted small">
+                        Returned at {{ borrowing.returned_at|date:"Y-m-d H:i" }}
+                    </span>
+                {% endif %}
+            </td>
+        </tr>
+    {% empty %}
+        <tr>
+            <td colspan="6" class="text-muted">
+                You have no borrowings yet.
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

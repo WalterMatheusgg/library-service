@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ author }}</h1>
+
+<p class="text-muted">
+    Date of birth: {{ author.date_of_birth|default:"Not provided" }}
+</p>
+
+{% if user.is_authenticated %}
+    <div class="mb-4">
+        <a href="{% url 'catalog:author-update' author.pk %}" class="btn btn-warning">
+            Edit
+        </a>
+
+        <a href="{% url 'catalog:author-delete' author.pk %}" class="btn btn-danger">
+            Delete
+        </a>
+    </div>
+{% endif %}
+
+<h2 class="h4">Books by this author</h2>
+
+<div class="list-group">
+    {% for book in author.books.all %}
+        <a href="{{ book.get_absolute_url }}" class="list-group-item list-group-item-action">
+            {{ book.title }}
+        </a>
+    {% empty %}
+        <div class="list-group-item text-muted">
+            This author has no books yet.
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
