@@ -1,0 +1,32 @@
+body {
+    background: #f6f7fb;
+}
+
+.hero {
+    background:
+        linear-gradient(135deg, rgba(13, 110, 253, 0.15), rgba(33, 37, 41, 0.08)),
+        #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.stat-card {
+    border: 0;
+}
+
+.book-card {
+    border: 0;
+}
+
+.book-cover {
+    height: 260px;
+    object-fit: cover;
+}
+
+.book-cover-detail {
+    max-height: 520px;
+    object-fit: cover;
+}
+
+footer {
+    background: #ffffff;
+}
