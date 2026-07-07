@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-5 mb-4 bg-white rounded-3 shadow-sm">
+    <div class="container-fluid py-4">
+        <h1 class="display-5 fw-bold">Library Service</h1>
+
+        <p class="col-md-8 fs-5">
+            A Django portfolio project for managing books, authors, genres and borrowings.
+        </p>
+
+        <a href="{% url 'catalog:book-list' %}" class="btn btn-primary btn-lg">
+            Browse books
+        </a>
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'catalog:book-create' %}" class="btn btn-outline-dark btn-lg">
+                Add book
+            </a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <p class="text-muted mb-1">Books</p>
+                <h2>{{ num_books }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <p class="text-muted mb-1">Authors</p>
+                <h2>{{ num_authors }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <p class="text-muted mb-1">Genres</p>
+                <h2>{{ num_genres }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <p class="text-muted mb-1">Active borrowings</p>
+                <h2>{{ num_active_borrowings }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p class="text-muted small mt-4">
+    You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.
+</p>
+{% endblock %}

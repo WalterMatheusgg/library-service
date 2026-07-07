@@ -14,6 +14,8 @@ ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "*").split(",")
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.app.github.dev",
+    "https://localhost:8000",
+    "http://localhost:8000",
 ]
 
 INSTALLED_APPS = [
@@ -79,7 +81,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "pt-br"
 
 TIME_ZONE = "America/Sao_Paulo"
 
@@ -87,7 +89,8 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
