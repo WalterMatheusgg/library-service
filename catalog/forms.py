@@ -68,7 +68,7 @@ class BookForm(BootstrapFormMixin, forms.ModelForm):
             "cover_url": "URL da capa",
         }
         widgets = {
-            "genres": forms.CheckboxSelectMultiple,
+            "genres": forms.CheckboxSelectMultiple(),
             "description": forms.Textarea(attrs={"rows": 4}),
         }
 
