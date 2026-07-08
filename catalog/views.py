@@ -169,7 +169,7 @@ class BorrowBookView(LoginRequiredMixin, View):
         book = get_object_or_404(Book, pk=pk)
 
         if book.available_copies <= 0:
-            messages.error(request, "There are no available copies of this book.")
+            messages.error(request, "Não há exemplares disponíveis deste livro.")
             return redirect(book.get_absolute_url())
 
         form = BorrowingForm(request.POST)
@@ -180,9 +180,9 @@ class BorrowBookView(LoginRequiredMixin, View):
             borrowing.borrower = request.user
             borrowing.save()
 
-            messages.success(request, "Book borrowed successfully.")
+            messages.success(request, "Livro emprestado com sucesso.")
         else:
-            messages.error(request, "Please provide a valid due date.")
+            messages.error(request, "Informe uma data de devolução válida.")
 
         return redirect(book.get_absolute_url())
 
@@ -198,6 +198,6 @@ class ReturnBorrowingView(LoginRequiredMixin, View):
         borrowing.returned_at = timezone.now()
         borrowing.save(update_fields=["returned_at"])
 
-        messages.success(request, "Book returned successfully.")
+        messages.success(request, "Livro devolvido com sucesso.")
 
         return redirect("catalog:my-borrowings")

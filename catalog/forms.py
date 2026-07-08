@@ -9,10 +9,12 @@ class BootstrapFormMixin:
         for field in self.fields.values():
             widget = field.widget
 
-            if isinstance(widget, forms.Select):
-                widget.attrs.update({"class": "form-select"})
-            elif isinstance(widget, forms.CheckboxSelectMultiple):
+            if isinstance(widget, forms.CheckboxSelectMultiple):
                 widget.attrs.update({"class": "form-check-input"})
+            elif isinstance(widget, forms.CheckboxInput):
+                widget.attrs.update({"class": "form-check-input"})
+            elif isinstance(widget, (forms.Select, forms.SelectMultiple)):
+                widget.attrs.update({"class": "form-select"})
             else:
                 widget.attrs.update({"class": "form-control"})
 
