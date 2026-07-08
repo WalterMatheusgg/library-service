@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <span class="hero-badge">
+                    Autor cadastrado
+                </span>
+
+                <h1 class="h3 fw-bold mt-2">{{ author }}</h1>
+
+                <p class="text-muted mb-4">
+                    Informações gerais do autor e livros vinculados ao acervo.
+                </p>
+
+                <div class="border rounded-4 bg-light p-3 mb-3">
+                    <p class="mb-1 text-muted small">Data de nascimento</p>
+                    <p class="fw-semibold mb-0">
+                        {{ author.date_of_birth|date:"d/m/Y"|default:"Não informada" }}
+                    </p>
+                </div>
+
+                <div class="border rounded-4 bg-light p-3 mb-4">
+                    <p class="mb-1 text-muted small">Livros cadastrados</p>
+                    <p class="fw-semibold mb-0">
+                        {{ author.books.count }}
+                    </p>
+                </div>
+
+                {% if user.is_authenticated %}
+                    <div class="d-flex gap-2">
+                        <a href="{% url 'catalog:author-update' author.pk %}" class="btn btn-warning btn-sm">
+                            Editar
+                        </a>
+
+                        <a href="{% url 'catalog:author-delete' author.pk %}" class="btn btn-danger btn-sm">
+                            Excluir
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">Livros deste autor</h2>
+                <p class="section-subtitle">
+                    Obras vinculadas a {{ author }} no sistema.
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-3">
+            {% for book in author.books.all %}
+                <div class="col-md-6">
+                    <div class="card book-card">
+                        {% if book.cover_url %}
+                            <img
+                                src="{{ book.cover_url }}"
+                                class="card-img-top book-cover"
+                                alt="{{ book.title }}"
+                            >
+                        {% endif %}
+
+                        <div class="card-body p-4">
+                            <h3 class="h5 fw-bold">
+                                <a href="{{ book.get_absolute_url }}" class="text-decoration-none text-dark">
+                                    {{ book.title }}
+                                </a>
+                            </h3>
+
+                            <p class="text-muted small">
+                                {{ book.description|truncatewords:20 }}
+                            </p>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="small text-muted">
+                                    Disponíveis:
+                                    <strong class="text-dark">{{ book.available_copies }}</strong>
+                                </span>
+
+                                <a href="{{ book.get_absolute_url }}" class="btn btn-sm btn-outline-primary">
+                                    Detalhes
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <div class="empty-state">
+                        Este autor ainda não possui livros cadastrados.
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

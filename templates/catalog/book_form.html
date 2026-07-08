@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card form-page-card">
+            <div class="card-body p-4 p-md-5">
+                <h1 class="h3 fw-bold mb-2">
+                    {% if object %}
+                        Editar livro
+                    {% else %}
+                        Cadastrar livro
+                    {% endif %}
+                </h1>
+
+                <p class="text-muted mb-4">
+                    Preencha as informações do livro para manter o acervo atualizado.
+                </p>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="{{ form.title.id_for_label }}" class="form-label">
+                            {{ form.title.label }}
+                        </label>
+                        {{ form.title }}
+                        {{ form.title.errors }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.author.id_for_label }}" class="form-label">
+                            {{ form.author.label }}
+                        </label>
+                        {{ form.author }}
+                        {{ form.author.errors }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">
+                            {{ form.genres.label }}
+                        </label>
+
+                        <div class="d-flex flex-column gap-2">
+                            {% for checkbox in form.genres %}
+                                <div class="form-check">
+                                    {{ checkbox.tag }}
+                                    <label
+                                        class="form-check-label"
+                                        for="{{ checkbox.id_for_label }}"
+                                    >
+                                        {{ checkbox.choice_label }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        {{ form.genres.errors }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.inventory.id_for_label }}" class="form-label">
+                            {{ form.inventory.label }}
+                        </label>
+                        {{ form.inventory }}
+                        {{ form.inventory.errors }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.description.id_for_label }}" class="form-label">
+                            {{ form.description.label }}
+                        </label>
+                        {{ form.description }}
+                        {{ form.description.errors }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.cover_url.id_for_label }}" class="form-label">
+                            {{ form.cover_url.label }}
+                        </label>
+                        {{ form.cover_url }}
+                        {{ form.cover_url.errors }}
+                    </div>
+
+                    <div class="d-flex gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary">
+                            Salvar
+                        </button>
+
+                        <button
+                            type="button"
+                            onclick="history.back()"
+                            class="btn btn-outline-secondary"
+                        >
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

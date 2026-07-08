@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="section-header">
+    <div>
+        <h1 class="section-title">Gêneros</h1>
+        <p class="section-subtitle">
+            Organize o acervo por categorias literárias.
+        </p>
+    </div>
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'catalog:genre-create' %}" class="btn btn-primary">
+            Cadastrar gênero
+        </a>
+    {% endif %}
+</div>
+
+<div class="table-card">
+    <table class="table table-hover align-middle">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Livros vinculados</th>
+            {% if user.is_authenticated %}
+                <th>Ações</th>
+            {% endif %}
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for genre in genre_list %}
+            <tr>
+                <td class="fw-semibold">{{ genre.name }}</td>
+                <td>{{ genre.books.count }}</td>
+
+                {% if user.is_authenticated %}
+                    <td>
+                        <a href="{% url 'catalog:genre-update' genre.pk %}" class="btn btn-sm btn-warning">
+                            Editar
+                        </a>
+
+                        <a href="{% url 'catalog:genre-delete' genre.pk %}" class="btn btn-sm btn-danger">
+                            Excluir
+                        </a>
+                    </td>
+                {% endif %}
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="3" class="text-muted p-4">
+                    Nenhum gênero encontrado.
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% include "catalog/includes/pagination.html" %}
+{% endblock %}
