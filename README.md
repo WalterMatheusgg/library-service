@@ -1,11 +1,8 @@
-## Biblioteca Digital 
-
-
 ## Resumo
 
 Este Pull Request implementa um projeto de portfólio Django personalizado chamado Biblioteca Digital.
 
-O projeto foi desenvolvido com base na estrutura do projeto Taxi Service e inclui visualizações, modelos, autenticação e operações CRUD. O principal objetivo é demonstrar habilidades em Django por meio de um aplicativo web completo que pode ser anexado a um currículo.
+O projeto foi desenvolvido com base na estrutura do projeto Taxi Service e inclui visualizações, modelos, autenticação e operações CRUD.
 
 ## Funcionalidades implementadas
 
@@ -54,34 +51,27 @@ Um diagrama do banco de dados foi adicionado para mostrar a estrutura e os relac
 
 Foi criado um comando customizado para popular o sistema com livros, autores e gêneros reais:
 
-```bash
 python manage.py seed_data
-
-O projeto também inclui um usuário comum para testes:
-
-Usuário: demo
-Senha: demo12345
 
 
 ## Capturas de tela:
-<img width="1318" height="727" alt="Screenshot 2026-07-07 00 52 08" src="https://github.com/user-attachments/assets/956f9a0d-08f6-4338-9fad-dd8c3f4aa098" />
-<img width="1318" height="727" alt="Screenshot 2026-07-07 00 51 55" src="https://github.com/user-attachments/assets/24bdf4e0-a8e2-425e-b08f-7bc4b5cdc0e1" />
-<img width="1318" height="727" alt="Screenshot 2026-07-07 00 50 57" src="https://github.com/user-attachments/assets/81742362-2e34-4c30-ab04-19e10dd1f55b" />
-<img width="1318" height="727" alt="Screenshot 2026-07-07 00 50 09" src="https://github.com/user-attachments/assets/deca437f-6572-45ec-9a0e-2b92a00b3f79" />
-<img width="1314" height="726" alt="Screenshot 2026-07-07 01 12 38" src="https://github.com/user-attachments/assets/a8ccd85e-2147-4b97-adee-fa0f781c6cf5" />
-<img width="1314" height="726" alt="Screenshot 2026-07-07 01 12 38" src="https://github.com/user-attachments/assets/2f23b654-8f50-4c3e-9121-e108f0107a66" />
-<img width="1314" height="726" alt="Screenshot 2026-07-07 01 12 27" src="https://github.com/user-attachments/assets/a77168e6-c4f2-43be-962a-93e354f22840" />
-<img width="1314" height="726" alt="Screenshot 2026-07-07 01 12 19" src="https://github.com/user-attachments/assets/53cab7c6-2a7e-4da7-bc94-f94ed2ec8801" />
-<img width="1314" height="726" alt="Screenshot 2026-07-07 01 12 09" src="https://github.com/user-attachments/assets/9e8b888c-116f-4949-9158-81b38f848b1e" />
-<img width="1314" height="726" alt="Screenshot 2026-07-07 01 11 59" src="https://github.com/user-attachments/assets/936762ec-377d-40a6-97af-e797ecb53506" />
-<img width="1314" height="726" alt="Screenshot 2026-07-07 01 11 44" src="https://github.com/user-attachments/assets/25a61252-a6d8-48ae-912f-ce723bc19ce0" />
-<img width="1314" height="726" alt="Screenshot 2026-07-07 01 11 27" src="https://github.com/user-attachments/assets/f5bd9b2c-8f76-44ea-a3f9-0f37dcb419db" />
-<img width="1314" height="726" alt="Screenshot 2026-07-07 01 11 21" src="https://github.com/user-attachments/assets/8125aca8-84c4-4f1b-ab6c-6d20ad9a759b" />
+
+<img width="1314" height="726" alt="Screenshot 2026-07-07 01 12 38" src="https://github.com/user-attachments/assets/0b9d3210-eee0-405a-9c41-f7a0b9bd93df" />
+<img width="1314" height="726" alt="Screenshot 2026-07-07 01 12 27" src="https://github.com/user-attachments/assets/442ca21a-e49c-4907-9f2b-e188e0d6dd84" />
+<img width="1314" height="726" alt="Screenshot 2026-07-07 01 12 19" src="https://github.com/user-attachments/assets/8e739a35-5311-4d33-890b-bec6317f071a" />
+<img width="1314" height="726" alt="Screenshot 2026-07-07 01 12 09" src="https://github.com/user-attachments/assets/d782890a-2ac8-44c4-b2a5-c664b656d9ac" />
+<img width="1314" height="726" alt="Screenshot 2026-07-07 01 11 59" src="https://github.com/user-attachments/assets/9f07fb20-988c-421b-b1c3-5ed686eb6595" />
+<img width="1314" height="726" alt="Screenshot 2026-07-07 01 11 44" src="https://github.com/user-attachments/assets/e433fa32-83d9-4df3-8757-29a0ec6544a5" />
+<img width="1314" height="726" alt="Screenshot 2026-07-07 01 11 27" src="https://github.com/user-attachments/assets/31cf243a-abc4-4bb0-b93e-b399ac2bac20" />
+<img width="1314" height="726" alt="Screenshot 2026-07-07 01 11 21" src="https://github.com/user-attachments/assets/c6a610cb-8f47-4682-aea0-1d1889f57b36" />
+<img width="1318" height="727" alt="Screenshot 2026-07-07 00 51 55" src="https://github.com/user-attachments/assets/fc553bd5-0847-4752-a60b-36be7e054951" />
+<img width="1318" height="727" alt="Screenshot 2026-07-07 00 50 57" src="https://github.com/user-attachments/assets/5c916f30-d475-46ed-a7f3-4fb3c3da00f5" />
+<img width="1318" height="727" alt="Screenshot 2026-07-07 00 50 09" src="https://github.com/user-attachments/assets/80b05085-e079-4c25-bc08-3e56e0cc1b56" />
+<img width="1318" height="727" alt="Screenshot 2026-07-07 00 49 26" src="https://github.com/user-attachments/assets/56ffe7e2-a49f-4520-9b58-eb72bb4abf8d" />
 
 
 
-## diagrama do banco de dados:
+## Diagrama do banco de dados:
 
 <img width="1800" height="1200" alt="diagrama_banco_biblioteca_digital" src="https://github.com/user-attachments/assets/5450f4e1-0274-411a-8971-266c7217fa4f" />
-
 
